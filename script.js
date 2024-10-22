@@ -1,13 +1,10 @@
-// Referencias a los elementos del DOM
 const taskForm = document.getElementById('task-form');
 const taskInput = document.getElementById('task-input');
 const taskList = document.getElementById('task-list');
 const filterButtons = document.querySelectorAll('#filter-buttons button');
 
-// Cargar tareas desde localStorage
 document.addEventListener('DOMContentLoaded', loadTasksFromLocalStorage);
 
-// Agregar tarea
 taskForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -22,7 +19,6 @@ taskForm.addEventListener('submit', function (e) {
     taskInput.value = '';
 });
 
-// Delegación de eventos para marcar como completada o eliminar tareas
 taskList.addEventListener('click', function (e) {
     if (e.target.classList.contains('complete-btn')) {
         const taskItem = e.target.closest('li');
@@ -47,29 +43,26 @@ function filterTasks(filter) {
     tasks.forEach(task => {
         switch (filter) {
             case 'all':
-                task.style.display = 'flex'; // Mostrar todas las tareas
+                task.style.display = 'flex'; 
                 break;
             case 'pending':
-                // Mostrar solo las tareas que no estén completadas
                 if (task.classList.contains('completed')) {
-                    task.style.display = 'none'; // Ocultar completadas
+                    task.style.display = 'none'; 
                 } else {
-                    task.style.display = 'flex'; // Mostrar pendientes
+                    task.style.display = 'flex'; 
                 }
                 break;
             case 'completed':
-                // Mostrar solo las tareas completadas
                 if (task.classList.contains('completed')) {
-                    task.style.display = 'flex'; // Mostrar completadas
+                    task.style.display = 'flex'; 
                 } else {
-                    task.style.display = 'none'; // Ocultar pendientes
+                    task.style.display = 'none'; 
                 }
                 break;
         }
     });
 }
 
-// Crear tarea
 function createTaskItem(taskText, isCompleted = false) {
     const taskItem = document.createElement('li');
     taskItem.classList.add('task-item', 'list-group-item', 'd-flex', 'justify-content-between', 'align-items-center', 'mb-2');
@@ -85,14 +78,12 @@ function createTaskItem(taskText, isCompleted = false) {
     return taskItem;
 }
 
-// Guardar tarea en localStorage
 function saveTaskToLocalStorage(taskText) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.push({ text: taskText, completed: false });
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-// Cargar tareas desde localStorage
 function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.forEach(task => {
@@ -101,7 +92,6 @@ function loadTasksFromLocalStorage() {
     });
 }
 
-// Actualizar tarea completada en localStorage
 function updateTaskCompletionInLocalStorage(taskItem) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const taskText = taskItem.querySelector('span').textContent;
@@ -115,7 +105,6 @@ function updateTaskCompletionInLocalStorage(taskItem) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-// Eliminar tarea de localStorage
 function removeTaskFromLocalStorage(taskItem) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const taskText = taskItem.querySelector('span').textContent;
