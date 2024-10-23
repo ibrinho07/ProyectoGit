@@ -37,7 +37,7 @@ filterButtons.forEach(button => {
         filterTasks(this.getAttribute('data-filter'));
     });
 });
-// se agrega funciones al js
+
 function filterTasks(filter) {
     const tasks = document.querySelectorAll('.task-item');
     tasks.forEach(task => {
@@ -82,6 +82,15 @@ function saveTaskToLocalStorage(taskText) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.push({ text: taskText, completed: false });
     localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+
+function loadTasksFromLocalStorage() {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach(task => {
+        const taskItem = createTaskItem(task.text, task.completed);
+        taskList.appendChild(taskItem);
+    });
 }
 
 function updateTaskCompletionInLocalStorage(taskItem) {
