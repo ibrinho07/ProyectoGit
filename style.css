@@ -30,7 +30,7 @@ h1 {
     display: flex;
     justify-content: space-between;
 }
-/* segunda parte del css */
+
 #task-input {
     width: 70%;
     padding: 10px;
@@ -64,4 +64,27 @@ button:hover {
     background-color: #f9f9f9;
     border-radius: 5px;
     margin-bottom: 10px;
+}
+
+.task-item.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+  
+button.delete-btn {
+    background-color: #d9534f;
+    margin-left: 10px;
+}
+
+button.delete-btn:hover {
+    background-color: #c9302c;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.hidden {
+    display: none;
 }

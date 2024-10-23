@@ -37,7 +37,7 @@ filterButtons.forEach(button => {
         filterTasks(this.getAttribute('data-filter'));
     });
 });
-// se agrega funciones al js
+
 function filterTasks(filter) {
     const tasks = document.querySelectorAll('.task-item');
     tasks.forEach(task => {
@@ -84,3 +84,31 @@ function saveTaskToLocalStorage(taskText) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+function loadTasksFromLocalStorage() {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach(task => {
+        const taskItem = createTaskItem(task.text, task.completed);
+        taskList.appendChild(taskItem);
+    });
+}
+
+function updateTaskCompletionInLocalStorage(taskItem) {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const taskText = taskItem.querySelector('span').textContent;
+
+    tasks.forEach(task => {
+        if (task.text === taskText) {
+            task.completed = taskItem.classList.contains('completed');
+        }
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function removeTaskFromLocalStorage(taskItem) {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const taskText = taskItem.querySelector('span').textContent;
+
+    const updatedTasks = tasks.filter(task => task.text !== taskText);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+}
