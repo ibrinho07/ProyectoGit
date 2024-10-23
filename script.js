@@ -84,6 +84,7 @@ function saveTaskToLocalStorage(taskText) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+
 function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.forEach(task => {

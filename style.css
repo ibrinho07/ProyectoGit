@@ -66,11 +66,13 @@ button:hover {
     margin-bottom: 10px;
 }
 
+ /* Agregando La Tercera Parte --- Ultimo CSS --- */
+
 .task-item.completed {
     text-decoration: line-through;
     opacity: 0.6;
 }
-  
+
 button.delete-btn {
     background-color: #d9534f;
     margin-left: 10px;
